@@ -55,6 +55,11 @@ shorewall:
       comment: Allow connections to saltmaster
       # No ipv is given here          # Rule for ipv4 and ipv6 
 
+  stuppedrules:
+    - action: ACCEPT
+      source: all
+      dest: all
+
   masq:
     - interface: eth0
       source:   '10.100.200.45/29'
