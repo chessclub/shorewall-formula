@@ -1,0 +1,27 @@
+#
+# Shorewall version 5 - Stopped Rules File
+#
+# For information about entries in this file, type "man shorewall-stoppedrules"
+#
+# The manpage is also online at
+# http://www.shorewall.net/manpages/shorewall-stoppedrules.html
+#
+# See http://shorewall.net/starting_and_stopping_shorewall.htm for additional
+# information.
+#
+###############################################################################
+#ACTION		SOURCE			DEST		PROTO	DEST	SOURCE
+#								                PORT(S)	PORT(S)
+
+{%- for rule in salt['pillar.get']('shorewall:stoppedrules', {}) %}
+{# skip if ip version does not match #}
+{%-   if rule.ipv is defined and rule.ipv != ipv %}{% continue %}{%endif %}
+
+{%-   if rule is string %}
+{{ rule }}
+{%-   else %}
+# {{ rule.get('comment', '') }}
+{{ rule.get('action') }}  {{ rule.get('source', '-') }}  {{ rule.get('dest', '-') }}  {{ rule.get('proto', '-') }}  {{ rule.get('destport', '-') }}  {{ rule.get('sourceport', '-') }}
+{%- endif %}
+
+{%- endfor %}

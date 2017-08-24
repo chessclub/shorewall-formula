@@ -17,6 +17,7 @@ Debian:
     - rules
     - masq
     - routestopped
+    - stoppedrules
     - params
     - tcinterfaces
     - tcpri

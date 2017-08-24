@@ -34,6 +34,8 @@ shorewall_v{{ v }}:
 {%-      if config == 'tcinterfaces' and v == 6 %}{% continue %}{% endif %}
 {%-      if config == 'tcdevices' and v == 6 %}{% continue %}{% endif %}
 {%-      if config == 'tcclasses' and v == 6 %}{% continue %}{% endif %}
+{%-      if config == 'routestopped' and pkg_version > '4.' %}{% continue %} {% endif %}
+{%-      if config == 'stoppedrules' and pkg_version < '5.' %}{% continue %} {% endif %}
 
 shorewall_v{{ v }}_config_{{ config }}:
   file.managed:
